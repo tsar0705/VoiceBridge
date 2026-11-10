@@ -1,0 +1,38 @@
+services:
+  - type: web
+    name: voicebridge-backend
+    env: python
+    region: oregon
+    plan: free
+    branch: main
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT --workers 2
+    healthCheckPath: /api/health
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9
+      - key: GNANI_API_KEY
+        sync: false
+      - key: GNANI_PRISMA_ENDPOINT
+        value: https://api.vachana.ai/stt/v3
+      - key: GNANI_PRISMA_MODEL
+        value: prisma-v3.0
+      - key: GNANI_TIMBRE_ENDPOINT
+        value: https://api.vachana.ai/api/v1/tts/inference
+      - key: GNANI_TIMBRE_MODEL
+        value: timbre-v2.5
+      - key: GNANI_DEFAULT_VOICE
+        value: Nalini
+      - key: LLM_PROVIDER
+        value: gemini
+      - key: LLM_MODEL
+        value: gemini-3.5-flash-lite
+      - key: LLM_API_KEY
+        sync: false
+      - key: CORS_ORIGINS
+        value: https://voicebridge.vercel.app,http://localhost:5173
+      - key: MAX_AUDIO_SIZE_MB
+        value: 10
+      - key: MAX_RECORDING_DURATION_SEC
+        value: 30

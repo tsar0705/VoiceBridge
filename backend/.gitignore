@@ -1,0 +1,22 @@
+# Environments & Secrets
+.env
+.env.local
+.env.*.local
+*.env
+
+# Python Bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Pytest & Coverage
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Audio / Test outputs
+test_output/
+*.wav
+*.mp3
+*.webm
+*.ogg
